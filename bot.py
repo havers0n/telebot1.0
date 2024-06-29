@@ -2,7 +2,7 @@ import telebot
 from telebot.types import ReplyKeyboardMarkup, KeyboardButton, WebAppInfo
 
 API_TOKEN = '6609160743:AAHAH5-zMOTQ7mgw04xl1v0Hby3GZoN0s94'
-WEB_APP_URL = 'https://havers0n.github.io/telebot1.0/'  # URL вашего веб-приложения
+WEB_APP_URL = 'https://havers0n.github.io/telebot1.0/'  # URL вашего React веб-приложения
 
 bot = telebot.TeleBot(API_TOKEN)
 
@@ -14,7 +14,7 @@ def send_welcome(message):
     markup.add(web_app_button)
     bot.send_message(message.chat.id, "Welcome! Click the button below to open the Mini App.", reply_markup=markup)
 
-@bot.message_handler(func=lambda message: hasattr(message, 'web_app_data'))
+@bot.message_handler(func=lambda message: 'web_app_data' in message.json)
 def handle_web_app_data(message):
     data = message.web_app_data.data
     bot.send_message(message.chat.id, f"Received data from Mini App: {data}")
